@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
 
+    private Color color;
     private Rigidbody2D rb;
     private float horizontal;
     private float move;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        color = GetComponent<SpriteRenderer>().color;
         flag = false;
     }
 
@@ -44,6 +46,16 @@ public class PlayerController : MonoBehaviour
             }
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            RestoreColor();
+        }
+    }
+
+    public void RestoreColor()
+    {
+        GetComponent<SpriteRenderer>().color = color;
     }
 
 }

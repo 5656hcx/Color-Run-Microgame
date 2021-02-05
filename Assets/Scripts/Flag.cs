@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
-	public WallController Entrance;
+    public WallController Entrance;
 
     void OnTriggerEnter2D(Collider2D col)
     {
-    	col.gameObject.GetComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
-    	Entrance.GetComponent<SpriteRenderer>().color = Color.grey;
-    	gameObject.SetActive(false);
+        SpriteRenderer sr = col.gameObject.GetComponent<SpriteRenderer>();
+        sr.sprite = GetComponent<SpriteRenderer>().sprite;
+        sr.color = Color.white;
+        Entrance.GetComponent<SpriteRenderer>().color = Color.grey;
+        gameObject.SetActive(false);
     }
 }
