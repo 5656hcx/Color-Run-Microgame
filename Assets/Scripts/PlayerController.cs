@@ -9,15 +9,11 @@ public class PlayerController : MonoBehaviour
 
     private Color color;
     private Rigidbody2D rb;
-    private float horizontal;
-    private float move;
-    private bool flag;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         color = GetComponent<SpriteRenderer>().color;
-        flag = false;
     }
 
     void Update()
@@ -29,33 +25,18 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (!flag)
-            {
-                transform.Rotate(new Vector3(0, 180, 0));
-                flag = true;
-            }
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (flag)
-            {
-                transform.Rotate(new Vector3(0, 180, 0));
-                flag = false;
-            }
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            RestoreColor();
+            GetComponent<SpriteRenderer>().color = color;
         }
-    }
-
-    public void RestoreColor()
-    {
-        GetComponent<SpriteRenderer>().color = color;
     }
 
 }
