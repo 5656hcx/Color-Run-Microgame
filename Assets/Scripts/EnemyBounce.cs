@@ -14,6 +14,16 @@ public class EnemyBounce : MonoBehaviour
         
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 9), ForceMode2D.Impulse);
 
+        if (transform.position.x < -2)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 2), ForceMode2D.Impulse);
+        }
+
+        if (transform.position.x > -2)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 2), ForceMode2D.Impulse);
+        }
+        
         if(other.gameObject.CompareTag ("Player")){
             GameObject.Find("Player").GetComponent<SpriteRenderer>().color = RandomColor();
         }
