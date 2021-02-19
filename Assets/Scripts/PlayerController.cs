@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject {
 
-    public float maxSpeed = 7;
+    public float horizontalSpeed = 7;
     public float jumpTakeOffSpeed = 7;
-    //public CapsuleCollider2D PlayerCollider;
+    // public CapsuleCollider2D PlayerCollider;
 
     private SpriteRenderer spriteRenderer;
-    //private Animator animator;
+    // private Animator animator;
 
     // Use this for initialization
     void Awake () 
     {
         spriteRenderer = GetComponent<SpriteRenderer> ();
-        //PlayerCollider = GetComponent<CapsuleCollider2D>();
-        //animator = GetComponent<Animator> ();
+        // PlayerCollider = GetComponent<CapsuleCollider2D>();
+        // animator = GetComponent<Animator> ();
     }
 
     protected override void ComputeVelocity()
@@ -25,21 +25,30 @@ public class PlayerController : PhysicsObject {
 
         move.x = Input.GetAxis ("Horizontal");
 
-        if (Input.GetButtonDown ("Jump") && grounded) {
-            velocity.y = jumpTakeOffSpeed;
-        } else if (Input.GetButtonUp ("Jump")) 
+        if (Input.GetButtonDown ("Jump") && grounded)
         {
-            if (velocity.y > 0) {
+            velocity.y = jumpTakeOffSpeed;
+        }
+        else if (Input.GetButtonUp ("Jump")) 
+        {
+            if (velocity.y > 0)
+            {
                 velocity.y = velocity.y * 0.5f;
             }
         }
 
-        if (move.x > 0.01f) spriteRenderer.flipX = false;
-        else spriteRenderer.flipX = true;
+        if (move.x > minMoveDistance)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (move.x < -minMoveDistance)
+        {
+            spriteRenderer.flipX = true;
+        }
 
         //animator.SetBool ("grounded", grounded);
-        //animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);
+        //animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / horizontalSpeed);
 
-        targetVelocity = move * maxSpeed;
+        targetVelocity = move * horizontalSpeed;
     }
 }
