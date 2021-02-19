@@ -2,41 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    public float moveSpeed;
-    public float jumpForce;
+public class PlayerController : PhysicsObject {
 
-    private Color color;
-    private Rigidbody2D rb;
+    public float maxSpeed = 7;
+    public float jumpTakeOffSpeed = 7;
+    public CapsuleCollider2D PlayerCollider;
 
-    void Start()
+    private SpriteRenderer spriteRenderer;
+    //private Animator animator;
+
+    // Use this for initialization
+    void Awake () 
     {
-        rb = GetComponent<Rigidbody2D>();
-        color = GetComponent<SpriteRenderer>().color;
+        spriteRenderer = GetComponent<SpriteRenderer> ();
+        PlayerCollider = GetComponent<CapsuleCollider2D>();
+        //animator = GetComponent<Animator> ();
     }
 
-    void Update()
+    protected override void ComputeVelocity()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        Vector2 move = Vector2.zero;
+
+        move.x = Input.GetAxis ("Horizontal");
+
+        if (Input.GetButtonDown ("Jump") && grounded) {
+            velocity.y = jumpTakeOffSpeed;
+        } else if (Input.GetButtonUp ("Jump")) 
         {
-            rb.AddForce(new Vector2(0, jumpForce));
+            if (velocity.y > 0) {
+                velocity.y = velocity.y * 0.5f;
+            }
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if(move.x > 0.01f)
         {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            if(spriteRenderer.flipX == true)
+            {
+                spriteRenderer.flipX = false;
+            }
+        } 
+        else if (move.x < -0.01f)
+        {
+            if(spriteRenderer.flipX == false)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        }
+        //animator.SetBool ("grounded", grounded);
+        //animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            GetComponent<SpriteRenderer>().color = color;
-        }
+        targetVelocity = move * maxSpeed;
     }
-
 }
