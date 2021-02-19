@@ -11,12 +11,17 @@ public class PlayerController : PhysicsObject {
     private SpriteRenderer spriteRenderer;
     // private Animator animator;
 
+    // whether the player reaches the destination 
+    private bool curStatus;
+
+
     // Use this for initialization
     void Awake () 
     {
         spriteRenderer = GetComponent<SpriteRenderer> ();
         // PlayerCollider = GetComponent<CapsuleCollider2D>();
         // animator = GetComponent<Animator> ();
+        curStatus = false;
     }
 
     protected override void ComputeVelocity()
@@ -50,5 +55,15 @@ public class PlayerController : PhysicsObject {
         //animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / horizontalSpeed);
 
         targetVelocity = move * horizontalSpeed;
+    }
+
+    public bool getStatus()
+    {
+        return curStatus;
+    }
+
+    public void reachDestination()
+    {
+        curStatus = true;
     }
 }

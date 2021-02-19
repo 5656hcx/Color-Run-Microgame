@@ -13,5 +13,9 @@ public class Flag : MonoBehaviour
         sr.color = Color.white;
         Entrance.GetComponent<SpriteRenderer>().color = Color.grey;
         gameObject.SetActive(false);
+
+        //change player's status
+        PlayerController player = FindObjectOfType<PlayerController>();
+        player.reachDestination();
     }
 }
