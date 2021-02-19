@@ -6,7 +6,7 @@ public class PlayerController : PhysicsObject {
 
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;
-    public CapsuleCollider2D PlayerCollider;
+    //public CapsuleCollider2D PlayerCollider;
 
     private SpriteRenderer spriteRenderer;
     //private Animator animator;
@@ -15,7 +15,7 @@ public class PlayerController : PhysicsObject {
     void Awake () 
     {
         spriteRenderer = GetComponent<SpriteRenderer> ();
-        PlayerCollider = GetComponent<CapsuleCollider2D>();
+        //PlayerCollider = GetComponent<CapsuleCollider2D>();
         //animator = GetComponent<Animator> ();
     }
 
@@ -34,20 +34,8 @@ public class PlayerController : PhysicsObject {
             }
         }
 
-        if(move.x > 0.01f)
-        {
-            if(spriteRenderer.flipX == true)
-            {
-                spriteRenderer.flipX = false;
-            }
-        } 
-        else if (move.x < -0.01f)
-        {
-            if(spriteRenderer.flipX == false)
-            {
-                spriteRenderer.flipX = true;
-            }
-        }
+        if (move.x > 0.01f) spriteRenderer.flipX = false;
+        else spriteRenderer.flipX = true;
 
         //animator.SetBool ("grounded", grounded);
         //animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);

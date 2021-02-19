@@ -5,16 +5,10 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
     public PlayerController player;
-    private Color color;
-
-    void Start()
-    {
-        color = GetComponent<SpriteRenderer>().color;
-    }
 
     void Update()
     {
-        if (player.GetComponent<SpriteRenderer>().color == color)
+        if (player.GetComponent<SpriteRenderer>().color == GetComponent<SpriteRenderer>().color)
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
         }
