@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 
 	public void StartGame() 
 	{
-	    SceneManager.LoadScene("MainScene");
+	    SceneManager.LoadScene("Level_1");
 	}
 
 	public void NotYetImplemented()
