@@ -5,34 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    private static int _currLevelIndex = 1;
-
     private PlayerController player;
-
     public Animator animator;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         player = FindObjectOfType<PlayerController>();
-
-        if (!player.getStatus())
-        {
-            // player doesn't reach the destination
-            return;
-        }
-
-        FadeToNextLevel();
     }
 
-    public void GoToLevel(int index)
+    void Update()
     {
-        if (index >= SceneManager.sceneCountInBuildSettings)
+        if (player.getStatus())
         {
-            index = 0;
+            FadeToNextLevel();
         }
-        _currLevelIndex = index;
-        SceneManager.LoadScene(_currLevelIndex);
     }
 
     public void FadeToNextLevel()
@@ -42,6 +28,11 @@ public class LevelController : MonoBehaviour
 
     public void OnFadeComplete()
     {
-        GoToLevel(_currLevelIndex + 1);
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        if (index >= SceneManager.sceneCountInBuildSettings)
+        {
+            index = 0;
+        }
+        SceneManager.LoadScene(index);
     }
 }
