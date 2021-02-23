@@ -4,8 +4,12 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+	public GameObject Dialog;
+	public Animator TitleAnimator;
 	public TextMeshProUGUI Toast;
 	public float toastFadeRate;
+
+	private bool showDialog = false;
 
 	public void StartGame() 
 	{
@@ -16,6 +20,17 @@ public class UIController : MonoBehaviour
 	{
 		Toast.gameObject.SetActive(true);
 		Toast.color = Color.white;
+	}
+
+	public void ShowDialog()
+	{
+		showDialog = !showDialog;
+		TitleAnimator.SetBool("showDialog", showDialog);
+	}
+
+	public void OnAnimationEnds()
+	{
+		Dialog.SetActive(showDialog);
 	}
 
 	void Update()
