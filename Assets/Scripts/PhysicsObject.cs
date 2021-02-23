@@ -18,6 +18,10 @@ public class PhysicsObject : MonoBehaviour {
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
 
+    protected bool[] collisions = new bool[4]; // { top,bot,left,right }
+    protected HashSet<GameObject> colliders = new HashSet<GameObject>();
+
+
     void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -36,6 +40,11 @@ public class PhysicsObject : MonoBehaviour {
         ComputeVelocity (); 
     }
 
+    protected virtual void OnCollisionHit()
+    {
+
+    }
+
     protected virtual void ComputeVelocity()
     {
     
@@ -46,7 +55,12 @@ public class PhysicsObject : MonoBehaviour {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
 
+        for (int i=0; i<4; i++)
+        {
+            collisions[i] = false;
+        }
         grounded = false;
+        colliders.Clear();
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
@@ -59,6 +73,8 @@ public class PhysicsObject : MonoBehaviour {
         move = Vector2.up * deltaPosition.y;
 
         Movement (move, true);
+
+        if (colliders.Count > 0) OnCollisionHit();
     }
 
     private void Movement(Vector2 move, bool yMovement)
@@ -72,14 +88,34 @@ public class PhysicsObject : MonoBehaviour {
             for (int i = 0; i < count; i++) 
             {
                 Vector2 currentNormal = hitBuffer[i].normal;
-                if (currentNormal.y > minGroundNormalY) 
+                colliders.Add(hitBuffer[i].collider.gameObject);
+
+                if (currentNormal.y < -minGroundNormalY)
                 {
+                    // from top
+                    collisions[0] = true;
+                }
+                else if (currentNormal.y > minGroundNormalY)
+                {
+                    // from bot
+                    collisions[1] = true;
                     grounded = true;
                     if (yMovement) 
                     {
                         groundNormal = currentNormal;
                         currentNormal.x = 0;
                     }
+                }
+
+                if (currentNormal.x > minGroundNormalY)
+                {
+                    // from left
+                    collisions[2] = true;
+                }
+                else if (currentNormal.x < -minGroundNormalY)
+                {
+                    // from right
+                    collisions[3] = true;
                 }
 
                 float projection = Vector2.Dot (velocity, currentNormal);
