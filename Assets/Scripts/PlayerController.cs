@@ -24,6 +24,20 @@ public class PlayerController : PhysicsObject {
         curStatus = false;
     }
 
+    protected override void OnCollisionHit()
+    {
+        // ugly solution
+        // discard it if better approach is found
+        foreach (GameObject obj in colliders)
+        {
+            if (obj.tag == "Enemy")
+            {
+                GetComponent<SpriteRenderer>().color = obj.GetComponent<SpriteRenderer>().color;
+                break;
+            }
+        }
+    }
+
     protected override void ComputeVelocity()
     {
         Vector2 move = Vector2.zero;
