@@ -4535,6 +4535,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: jump_tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8156586196152520712, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520718, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_text
@@ -4623,12 +4628,12 @@ PrefabInstance:
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -3.4
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
@@ -4682,6 +4687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: goal_tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156586196152520712, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520718, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
@@ -4771,12 +4781,12 @@ PrefabInstance:
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -69.9
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
@@ -5130,6 +5140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: color_tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8156586196152520712, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520718, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_text
@@ -5219,12 +5234,12 @@ PrefabInstance:
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -69.1
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
@@ -6586,6 +6601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: move_tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8156586196152520712, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6669,12 +6689,12 @@ PrefabInstance:
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -69.1
       objectReference: {fileID: 0}
     - target: {fileID: 8156586196152520719, guid: fbdaa11c4d63ddb499b8185e5cdfc1ad,
         type: 3}

@@ -117,7 +117,7 @@ public class PlayerController : PhysicsObject {
         else if (popUpIndex == 3 && Input.GetKeyDown(KeyCode.Space))
         {
             popUps[popUpIndex].SetActive(false);
-            popUpIndex = 0;
+            //popUpIndex = 0;
         }
     }
 }
