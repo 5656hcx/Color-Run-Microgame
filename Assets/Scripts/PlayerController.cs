@@ -14,6 +14,10 @@ public class PlayerController : PhysicsObject {
     // whether the player reaches the destination 
     private bool curStatus;
 
+    // popups of tutorials
+    public GameObject[] popUps;
+    private int popUpIndex;
+
 
     // Use this for initialization
     void Awake () 
@@ -22,6 +26,7 @@ public class PlayerController : PhysicsObject {
         // PlayerCollider = GetComponent<CapsuleCollider2D>();
         // animator = GetComponent<Animator> ();
         curStatus = false;
+        popUpIndex = 0;
     }
 
     protected override void OnCollisionHit()
@@ -79,5 +84,40 @@ public class PlayerController : PhysicsObject {
     public void reachDestination()
     {
         curStatus = true;
+    }
+
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "popUps" && popUpIndex < popUps.Length)
+        {
+            popUps[popUpIndex].SetActive(true);
+            col.enabled = false;
+        }
+
+    }
+
+    protected override void HandlePopUps()
+    {
+        if (popUpIndex == 0 && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
+        {
+            popUps[popUpIndex].SetActive(false);
+            popUpIndex++;
+        }
+        else if (popUpIndex == 1 && Input.GetKeyDown(KeyCode.Space))
+        {
+            popUps[popUpIndex].SetActive(false);
+            popUpIndex++;
+        }
+        else if (popUpIndex == 2 && Input.GetKeyDown(KeyCode.R))
+        {
+            popUps[popUpIndex].SetActive(false);
+            popUpIndex++;
+        }
+        else if (popUpIndex == 3 && Input.GetKeyDown(KeyCode.Space))
+        {
+            popUps[popUpIndex].SetActive(false);
+            popUpIndex = 0;
+        }
     }
 }

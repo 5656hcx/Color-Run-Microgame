@@ -37,7 +37,8 @@ public class PhysicsObject : MonoBehaviour {
     void Update() 
     {
         targetVelocity = Vector2.zero;
-        ComputeVelocity (); 
+        ComputeVelocity ();
+        HandlePopUps();
     }
 
     protected virtual void OnCollisionHit()
@@ -48,6 +49,11 @@ public class PhysicsObject : MonoBehaviour {
     protected virtual void ComputeVelocity()
     {
     
+    }
+
+    protected virtual void HandlePopUps()
+    {
+
     }
 
     void FixedUpdate()
