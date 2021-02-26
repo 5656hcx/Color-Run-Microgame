@@ -4,12 +4,14 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-	public GameObject Dialog;
+	public GameObject ButtonGroup;
 	public Animator TitleAnimator;
 	public TextMeshProUGUI Toast;
 	public float toastFadeRate;
 
+	private GameObject dialog;
 	private bool showDialog = false;
+	private bool hideButtonGroup = false;
 
 	public void StartGame() 
 	{
@@ -22,15 +24,48 @@ public class UIController : MonoBehaviour
 		Toast.color = Color.white;
 	}
 
-	public void ShowDialog()
+	public void ShowDialog(GameObject obj)
 	{
-		showDialog = !showDialog;
-		TitleAnimator.SetBool("showDialog", showDialog);
+		if (showDialog)
+		{
+			if (dialog == obj)
+			{
+				showDialog = false;
+				TitleAnimator.SetBool("showDialog", showDialog);
+			}
+			else
+			{
+				dialog.SetActive(false);
+				dialog = obj;
+				dialog.SetActive(true);
+			}
+		}
+		else
+		{
+			dialog = obj;
+			showDialog = true;
+			TitleAnimator.SetBool("showDialog", showDialog);
+		}
+	}
+
+	public void SetHideButtonGroup(bool flag)
+	{
+		ButtonGroup.SetActive(!flag);
+		hideButtonGroup = flag;
 	}
 
 	public void OnAnimationEnds()
 	{
-		Dialog.SetActive(showDialog);
+		dialog.SetActive(showDialog);
+		if (hideButtonGroup)
+		{
+			ButtonGroup.SetActive(!showDialog);
+		}
+		else
+		{
+			ButtonGroup.SetActive(true);
+		}
+		hideButtonGroup = false;
 	}
 
 	void Update()
