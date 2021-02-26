@@ -7,18 +7,21 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour
 {
-	public string TitleBeginWith;
-	public TextMeshProUGUI Title;
+    public Transform LevelPanel;
+    public LevelEntry EntryPrefab;
 
 	void Start()
 	{
+        for (int i=1; i<SceneManager.sceneCountInBuildSettings; i++)
+        {
+            LevelEntry entry = Instantiate(EntryPrefab);
+            entry.transform.SetParent(LevelPanel);
+            entry.Init(i, false);
+        }
 	}
 
-    public void Play()
+    public void Refresh()
     {
-    }
 
-    public void Next()
-    {
     }
 }
