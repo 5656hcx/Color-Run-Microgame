@@ -117,7 +117,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3620301122679336762}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8628442828264604624}
+        m_MethodName: Music
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1347493992742846794
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +246,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 264470790662043898}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8628442828264604624}
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3300787736740395299
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +454,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8628442828264604624}
-        m_MethodName: MenuClicked
+        m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -608,13 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8628442828264604631}
-  animator_menu: {fileID: 0}
   mask: {fileID: 8628442828452065668}
-  panel: {fileID: 6266783835324628189}
-  menu: {fileID: 4900391104551165364}
-  menuSprites:
-  - {fileID: 21300000, guid: a246595c1495b46489fc78ea45eeb675, type: 3}
-  - {fileID: 21300000, guid: 0c3e8f0198a1a40d7a64243600cbf84a, type: 3}
 --- !u!1 &8628442828452065670
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,4 +822,15 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2068192727649515768}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8628442828264604624}
+        m_MethodName: Home
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

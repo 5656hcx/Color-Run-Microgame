@@ -13,6 +13,8 @@ public class LevelController : MonoBehaviour
     public Animator animator;
     public Image mask;
 
+    private static int currentLevel;
+
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -21,6 +23,7 @@ public class LevelController : MonoBehaviour
             progress = XMLHelper.Load<Level>(Level.path);
         }
         mask.gameObject.SetActive(false);
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update()
@@ -35,25 +38,46 @@ public class LevelController : MonoBehaviour
     {
         mask.gameObject.SetActive(true);
         animator.SetTrigger("FadeOutTrigger");
-        if (SceneManager.GetActiveScene().buildIndex < progress.Length)
+
+        if (player.getStatus())
         {
-            progress[SceneManager.GetActiveScene().buildIndex].state = true;
+            if (currentLevel < progress.Length)
+            {
+                progress[currentLevel].state = true;
+            }
+            XMLHelper.Save<Level>(ref progress, Level.path);
         }
-        XMLHelper.Save<Level>(ref progress, Level.path);
     }
 
     public void OnFadeComplete()
     {
-        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        int index = currentLevel + 1;
         if (index >= SceneManager.sceneCountInBuildSettings)
         {
             index = 0;
         }
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void MenuClicked()
+    public void Menu()
     {
         animator.SetTrigger("MenuExpandTrigger");
+    }
+
+    public void Home()
+    {
+        currentLevel = SceneManager.sceneCountInBuildSettings;
+        FadeToNextLevel();
+    }
+
+    public void Restart()
+    {
+        currentLevel = currentLevel - 1;
+        FadeToNextLevel();
+    }
+
+    public void Music()
+    {
+        // NOT YET IMPLEMENTED
     }
 }
