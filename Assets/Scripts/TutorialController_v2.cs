@@ -5,7 +5,7 @@ using TMPro;
 
 public enum EscapeMode { POSITION, INPUT }
 
-public class TutorialsController_v2 : MonoBehaviour
+public class TutorialController_v2 : MonoBehaviour
 {
     public TextMeshProUGUI textMesh;
     public BoxCollider2D collider2d;

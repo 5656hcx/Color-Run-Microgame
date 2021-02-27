@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I am a tip!
+  m_text: Tip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -241,11 +241,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834171751829292438}
-  - component: {fileID: 834171751829292436}
+  - component: {fileID: 7670724185001339360}
   - component: {fileID: 834171751829292433}
   - component: {fileID: 834171751829292439}
+  - component: {fileID: 1084020532388698091}
   m_Layer: 0
-  m_Name: Tutorial PopUp
+  m_Name: TutorialPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +267,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &834171751829292436
+--- !u!114 &7670724185001339360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,16 +276,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 834171751829292432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbd9ff7acdda56448dddf0409cf293e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7acc51e5faf1e8241962b50d5de67bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 834171750158150396}
   collider2d: {fileID: 834171751829292439}
   canvas: {fileID: 834171751725977018}
-  text: I am a tip!
+  escapeMode: 0
+  text: Tip
   effectArea: {x: 1, y: 1}
   textOffset: {x: 0, y: 0}
+  inputButtonCodes: 
   inputButtonNames: []
+  isPersistent: 0
+  isAnyKeyMode: 0
+  isAutoHidden: 0
 --- !u!212 &834171751829292433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -361,3 +367,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &1084020532388698091
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834171751829292432}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5860a2d4110ee45f29a1d040f188f302, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

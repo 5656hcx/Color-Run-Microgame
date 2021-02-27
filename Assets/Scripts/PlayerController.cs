@@ -80,5 +80,4 @@ public class PlayerController : PhysicsObject {
     {
         curStatus = true;
     }
-
 }
