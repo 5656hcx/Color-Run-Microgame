@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using datatype;
@@ -10,6 +11,12 @@ public class LevelController : MonoBehaviour
     private static Level[] progress;
     private PlayerController player;
     public Animator animator;
+    public Animator animator_menu;
+
+    public Image mask;
+    public Image panel;
+    public Button menu;
+    public Sprite[] menuSprites = new Sprite[2];
 
     void Start()
     {
@@ -18,6 +25,7 @@ public class LevelController : MonoBehaviour
         {
             progress = XMLHelper.Load<Level>(Level.path);
         }
+        mask.gameObject.SetActive(false);
     }
 
     void Update()
@@ -30,6 +38,7 @@ public class LevelController : MonoBehaviour
 
     public void FadeToNextLevel()
     {
+        mask.gameObject.SetActive(true);
         animator.SetTrigger("FadeOutTrigger");
         if (SceneManager.GetActiveScene().buildIndex < progress.Length)
         {
@@ -46,5 +55,19 @@ public class LevelController : MonoBehaviour
             index = 0;
         }
         SceneManager.LoadScene(index);
+    }
+
+    public void MenuClicked()
+    {
+        if (menu.GetComponent<Image>().sprite == menuSprites[0])
+        {
+            menu.GetComponent<Image>().sprite = menuSprites[1];
+            animator.SetTrigger("MenuExpandTrigger");
+        }
+        else
+        {
+            menu.GetComponent<Image>().sprite = menuSprites[0];
+            animator.SetTrigger("MenuExpandTrigger");
+        }
     }
 }
