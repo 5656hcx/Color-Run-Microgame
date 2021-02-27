@@ -37,6 +37,7 @@ public class LevelSelector : MonoBehaviour
         {
             LevelEntry entry = Instantiate(EntryPrefab);
             entry.transform.SetParent(LevelPanel);
+            entry.transform.localScale = new Vector3(1, 1, 0);
             entry.Init(progress[i].index, !progress[i].state);
         }
 	}

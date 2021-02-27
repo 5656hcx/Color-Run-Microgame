@@ -4968,7 +4968,7 @@ PrefabInstance:
     - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
         type: 3}
       propertyPath: isAutoHidden
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
         type: 3}
