@@ -5,7 +5,12 @@ using TMPro;
 
 public enum EscapeMode { POSITION, INPUT }
 
-public class TutorialController_v2 : MonoBehaviour
+public abstract class TutorialStateReceiver : MonoBehaviour
+{
+    public virtual void OnAnotherTutorialComplete() {}
+}
+
+public class TutorialController_v2 : TutorialStateReceiver
 {
     public TextMeshProUGUI textMesh;
     public BoxCollider2D collider2d;
@@ -16,6 +21,7 @@ public class TutorialController_v2 : MonoBehaviour
     public Vector2 effectArea = Vector2.one;
     public Vector2 textOffset = Vector2.zero;
 
+    public TutorialStateReceiver[] receivers;
     public KeyCode[] inputButtonCodes;
     public string[] inputButtonNames;
 
@@ -23,17 +29,22 @@ public class TutorialController_v2 : MonoBehaviour
     public bool isAnyKeyMode = false;
     public bool isAutoHidden = false;
 
-    private bool insideArea;
+    public bool showCompleteText = false;
+    public string completeText = "Gotcha!";
+
+    private bool isPlayerInside;
     private int totalActionCount;
     private HashSet<KeyCode> codes;
     private HashSet<string> names;
+    private Animator animator;
 
     void Start()
     {
-        insideArea = false;
+        isPlayerInside = false;
         canvas.gameObject.SetActive(false);
         codes = new HashSet<KeyCode>();
         names = new HashSet<string>();
+        animator = GetComponent<Animator>();
 
         if (isAnyKeyMode)
         {
@@ -55,10 +66,9 @@ public class TutorialController_v2 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
         if (col.gameObject.tag == "Player")
         {
-            insideArea = true;
+            isPlayerInside = true;
             canvas.gameObject.SetActive(true);
         }
     }
@@ -67,14 +77,14 @@ public class TutorialController_v2 : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            insideArea = false;
+            isPlayerInside = false;
             if (!isPersistent)
             {
                 if (escapeMode == EscapeMode.POSITION)
                 {
-                    gameObject.SetActive(false);
+                    OnTutorialComplete();
                 }
-                else if (isAutoHidden)
+                else if (isAutoHidden && !animator.GetBool("TutorialComplete"))
                 {
                     canvas.gameObject.SetActive(false);
                 }
@@ -84,7 +94,7 @@ public class TutorialController_v2 : MonoBehaviour
 
     void Update()
     {
-        if (!isPersistent && insideArea && escapeMode == EscapeMode.INPUT)
+        if (!isPersistent && isPlayerInside && escapeMode == EscapeMode.INPUT)
         {
             foreach (string button in inputButtonNames)
             {
@@ -104,10 +114,32 @@ public class TutorialController_v2 : MonoBehaviour
 
             if (names.Count + codes.Count >= totalActionCount)
             {
-                
-                gameObject.SetActive(false);
-                //canvas.gameObject.SetActive(false); // disable the text
+                OnTutorialComplete();
+                // canvas.gameObject.SetActive(false); // disable the text
             }
         }
+    }
+
+    private void OnTutorialComplete()
+    {
+        if (showCompleteText)
+        {
+            textMesh.text = completeText;
+        }
+        foreach (TutorialStateReceiver rec in receivers)
+        {
+            rec.OnAnotherTutorialComplete();
+        }
+        animator.SetBool("TutorialComplete", true);
+    }
+
+    private void OnAnimationEnd()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public override void OnAnotherTutorialComplete()
+    {
+        OnTutorialComplete();
     }
 }
