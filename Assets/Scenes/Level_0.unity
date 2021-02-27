@@ -323,7 +323,7 @@ PrefabInstance:
         type: 3}
       propertyPath: receivers.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1644266213}
     - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
         type: 3}
       propertyPath: inputButtonCodes.Array.size
