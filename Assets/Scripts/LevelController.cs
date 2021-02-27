@@ -11,12 +11,7 @@ public class LevelController : MonoBehaviour
     private static Level[] progress;
     private PlayerController player;
     public Animator animator;
-    public Animator animator_menu;
-
     public Image mask;
-    public Image panel;
-    public Button menu;
-    public Sprite[] menuSprites = new Sprite[2];
 
     void Start()
     {
@@ -59,15 +54,6 @@ public class LevelController : MonoBehaviour
 
     public void MenuClicked()
     {
-        if (menu.GetComponent<Image>().sprite == menuSprites[0])
-        {
-            menu.GetComponent<Image>().sprite = menuSprites[1];
-            animator.SetTrigger("MenuExpandTrigger");
-        }
-        else
-        {
-            menu.GetComponent<Image>().sprite = menuSprites[0];
-            animator.SetTrigger("MenuExpandTrigger");
-        }
+        animator.SetTrigger("MenuExpandTrigger");
     }
 }
