@@ -119,10 +119,10 @@ public class UIController : MonoBehaviour
 		for (int i=0; i<SceneManager.sceneCountInBuildSettings - 1; i++)
 		{
 			LevelEntry entry = Instantiate(EntryPrefab);
-			entry.clicked = new LevelEntry.OnClick(StartPlaying);
-			entry.Init(progress[i].index, !progress[i].state);
-			entry.transform.localScale = new Vector3(1, 1, 0);
 			entry.transform.SetParent(LevelPanel);
+			entry.transform.localScale = new Vector3(1, 1, 0);
+			entry.Init(progress[i].index, !progress[i].state);
+			entry.clicked = new LevelEntry.OnClick(StartPlaying);
 		}
 	}
 }
