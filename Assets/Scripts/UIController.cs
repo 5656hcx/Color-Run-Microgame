@@ -1,79 +1,81 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIController : MonoBehaviour
 {
-	public GameObject ButtonGroup;
-	public Animator TitleAnimator;
-	public TextMeshProUGUI Toast;
-	public float toastFadeRate;
+	public Image dialog;
+	public TextMeshProUGUI toast;
+	public GameObject buttonGroup;
+	public Animator animator;
+	public float toastFadeRate = 1;
 
-	private GameObject dialog;
-	private bool showDialog = false;
 	private bool hideButtonGroup = false;
 
-	public void StartGame() 
+	/* Animations - Start playing the game */
+
+	public void StartPlaying()
 	{
-	    SceneManager.LoadScene(1);
+		if (dialog != null) dialog.gameObject.SetActive(false);
+		animator.SetTrigger("StartPlaying");
 	}
 
-	public void NotYetImplemented()
+	private void StartPlayingAnimEnds()
 	{
-		Toast.gameObject.SetActive(true);
-		Toast.color = Color.white;
+		SceneManager.LoadScene(1);
 	}
 
-	public void ShowDialog(GameObject obj)
+	/* Animations - Show dialogs if any */
+
+	public void ShowDialog(Image dialog)
 	{
-		if (showDialog)
+		if (this.dialog == null)
 		{
-			if (dialog == obj)
-			{
-				showDialog = false;
-				TitleAnimator.SetBool("showDialog", showDialog);
-			}
-			else
-			{
-				dialog.SetActive(false);
-				dialog = obj;
-				dialog.SetActive(true);
-			}
+			this.dialog = dialog;
+			animator.SetBool("ShowDialog", true);
 		}
-		else
+		else if (this.dialog != dialog)
 		{
-			dialog = obj;
-			showDialog = true;
-			TitleAnimator.SetBool("showDialog", showDialog);
+			buttonGroup.SetActive(hideButtonGroup);
+			this.dialog.gameObject.SetActive(false);
+			this.dialog = dialog;
+			this.dialog.gameObject.SetActive(true);
 		}
+		else animator.SetBool("ShowDialog", false);
+	}
+
+	private void ShowDialogAnimEnds()
+	{
+		dialog.gameObject.SetActive(!dialog.gameObject.activeSelf);
+		if (!dialog.gameObject.activeSelf)
+		{
+			dialog = null;
+			buttonGroup.SetActive(true);
+		}
+		else buttonGroup.SetActive(!hideButtonGroup);
 	}
 
 	public void SetHideButtonGroup(bool flag)
 	{
-		ButtonGroup.SetActive(!flag);
+		//buttonGroup.SetActive(!flag);
 		hideButtonGroup = flag;
 	}
 
-	public void OnAnimationEnds()
+	/* Animations - Show debug message */
+
+	public void NotYetImplemented()
 	{
-		dialog.SetActive(showDialog);
-		if (hideButtonGroup)
-		{
-			ButtonGroup.SetActive(!showDialog);
-		}
-		else
-		{
-			ButtonGroup.SetActive(true);
-		}
-		hideButtonGroup = false;
+		toast.gameObject.SetActive(true);
+		toast.color = Color.white;
 	}
 
 	void Update()
 	{
-		if (Toast.gameObject.activeSelf)
+		if (toast.gameObject.activeSelf)
 		{
-			Toast.color -= new Color(0, 0, 0, toastFadeRate * Time.deltaTime);
-			if (Toast.color.a <= 0) Toast.gameObject.SetActive(false);
+			toast.color -= new Color(0, 0, 0, toastFadeRate * Time.deltaTime);
+			if (toast.color.a <= 0) toast.gameObject.SetActive(false);
 		}
 	}
 }
