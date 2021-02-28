@@ -135,6 +135,8 @@ MonoBehaviour:
   img_enabled: {fileID: 21300000, guid: 57f8d5cfb06ae5f42bda89d167c60b00, type: 3}
   img_disabled: {fileID: 21300000, guid: 12d5fae4c0de1403dbf8427b8e0019f4, type: 3}
   text: {fileID: 7172417026792383743}
+  btn: {fileID: 1553724158524476312}
+  LevelIndex: 0
 --- !u!1 &7918065250774847435
 GameObject:
   m_ObjectHideFlags: 0
