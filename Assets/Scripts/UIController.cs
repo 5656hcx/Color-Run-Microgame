@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -42,30 +42,36 @@ public class UIController : MonoBehaviour
 
 	public void ShowDialog(Image dialog)
 	{
-		if (this.dialog == null)
+		if (this.dialog == null) this.dialog = dialog;
+		if (this.dialog == dialog)
 		{
-			this.dialog = dialog;
-			animator.SetBool("ShowDialog", true);
+			if (animator.GetBool("ShowDialog"))
+			{
+				this.dialog.gameObject.SetActive(false);
+			}
+			animator.SetBool("ShowDialog", !animator.GetBool("ShowDialog"));
 		}
-		else if (this.dialog != dialog)
+		else
 		{
-			buttonGroup.SetActive(hideButtonGroup);
-			this.dialog.gameObject.SetActive(false);
-			this.dialog = dialog;
-			this.dialog.gameObject.SetActive(true);
+			if (animator.GetBool("ShowDialog"))
+			{
+				buttonGroup.SetActive(hideButtonGroup);
+				this.dialog.gameObject.SetActive(false);
+				this.dialog = dialog;
+				this.dialog.gameObject.SetActive(true);
+			}
+			else
+			{
+				this.dialog = dialog;
+				animator.SetBool("ShowDialog", true);
+			}
 		}
-		else animator.SetBool("ShowDialog", false);
 	}
 
 	private void ShowDialogAnimEnds()
 	{
-		dialog.gameObject.SetActive(!dialog.gameObject.activeSelf);
-		if (!dialog.gameObject.activeSelf)
-		{
-			dialog = null;
-			buttonGroup.SetActive(true);
-		}
-		else buttonGroup.SetActive(!hideButtonGroup);
+		dialog.gameObject.SetActive(animator.GetBool("ShowDialog"));
+		buttonGroup.SetActive(dialog.gameObject.activeSelf ? !hideButtonGroup : true);
 	}
 
 	// Ugly solution
