@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour
 		{
 			if (animator.GetBool("ShowDialog"))
 			{
-				buttonGroup.SetActive(hideButtonGroup);
+				buttonGroup.SetActive(!hideButtonGroup);
 				this.dialog.gameObject.SetActive(false);
 				this.dialog = dialog;
 				this.dialog.gameObject.SetActive(true);

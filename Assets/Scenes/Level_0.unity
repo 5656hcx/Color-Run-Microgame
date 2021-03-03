@@ -4674,7 +4674,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &737483425
 PrefabInstance:
@@ -5779,6 +5779,120 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d22ce7a92c841408f13cef25390461, type: 3}
+--- !u!1001 &2034592011
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 834171751725977031, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751725977031, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292432, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_Name
+      value: TutorialPopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292438, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292439, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 834171751829292439, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: text
+      value: Hold space key to jump higher
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: effectArea.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: effectArea.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: textOffset.y
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
+      propertyPath: showCompleteText
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13295eb85a606493c80278b1aac1700f, type: 3}
 --- !u!1001 &402837788282220878
 PrefabInstance:
   m_ObjectHideFlags: 0
