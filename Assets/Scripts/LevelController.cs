@@ -9,15 +9,15 @@ using datatype;
 public class LevelController : MonoBehaviour
 {
     private static Level[] progress;
-    private PlayerController player;
     public Animator animator;
     public Image mask;
 
     private static int currentLevel;
+    private static bool completed;
 
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        completed = false;
         if (progress == null)
         {
             progress = XMLHelper.Load<Level>(Level.path);
@@ -28,7 +28,7 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        if (player.getStatus())
+        if (completed == true)
         {
             FadeToNextLevel();
         }
@@ -39,7 +39,7 @@ public class LevelController : MonoBehaviour
         mask.gameObject.SetActive(true);
         animator.SetTrigger("FadeOutTrigger");
 
-        if (player.getStatus())
+        if (completed)
         {
             if (currentLevel < progress.Length)
             {
@@ -57,6 +57,11 @@ public class LevelController : MonoBehaviour
             index = 0;
         }
         SceneManager.LoadScene(index, LoadSceneMode.Single);
+    }
+
+    public static void OnLevelCompleted()
+    {
+        completed = true;
     }
 
     public void Menu()

@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flag : MonoBehaviour
+public class Flag : CollectibleController
 {
     public WallController Entrance;
 
-    void OnTriggerEnter2D(Collider2D col)
+    public override void OnItemCollected(GameObject obj)
     {
-        SpriteRenderer sr = col.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
         sr.sprite = GetComponent<SpriteRenderer>().sprite;
         sr.color = Color.white;
         Entrance.GetComponent<SpriteRenderer>().color = Color.grey;
         gameObject.SetActive(false);
 
-        //change player's status
-        PlayerController player = FindObjectOfType<PlayerController>();
-        player.reachDestination();
+        // do not change player's status anymore
+        // interact directly with LevelController
+        LevelController.OnLevelCompleted();
     }
 }
