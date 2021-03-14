@@ -15,11 +15,17 @@ public class UIController : MonoBehaviour
 	public Transform LevelPanel;
 	public LevelEntry EntryPrefab;
 
+	public Image title;
+	private Sprite newTitle;
+	private Sprite rawTitle;
+
 	private Image dialog;
 	private bool hideButtonGroup = false;
 
 	void Start()
 	{
+		newTitle = title.sprite;
+		rawTitle = title.sprite;
 		InitLevelEntries();
 	}
 
@@ -31,6 +37,7 @@ public class UIController : MonoBehaviour
 		animator.SetInteger("targetLevel", index);
 		animator.SetTrigger("StartPlaying");
 		buttonGroup.SetActive(true);
+		title.sprite = rawTitle;
 	}
 
 	private void StartPlayingAnimEnds()
@@ -59,6 +66,7 @@ public class UIController : MonoBehaviour
 				this.dialog.gameObject.SetActive(false);
 				this.dialog = dialog;
 				this.dialog.gameObject.SetActive(true);
+				changeTitle();
 			}
 			else
 			{
@@ -130,5 +138,14 @@ public class UIController : MonoBehaviour
 			entry.Init(progress[i].index, !progress[i].state);
 			entry.clicked = new LevelEntry.OnClick(StartPlaying);
 		}
+	}
+
+	public void setTitle(Sprite sprite)
+	{
+		newTitle = sprite;
+	}
+
+	private void changeTitle() {
+		title.sprite = animator.GetBool("ShowDialog") ? newTitle : rawTitle;
 	}
 }
