@@ -2428,6 +2428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
         type: 3}
+      propertyPath: isPersistent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426642333092314542, guid: 13295eb85a606493c80278b1aac1700f,
+        type: 3}
       propertyPath: textOffset.x
       value: 5
       objectReference: {fileID: 0}
