@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GemBehaviour : MonoBehaviour
+public class GemBehaviour : CollectibleController
 {
 	[Header("References")]
 	public GameObject gemVisuals;
@@ -12,28 +12,18 @@ public class GemBehaviour : MonoBehaviour
 
 	private float durationOfCollectedParticleSystem;
 
-
 	void Start()
 	{
 		durationOfCollectedParticleSystem = collectedParticleSystem.GetComponent<ParticleSystem>().main.duration;
 	}
 
-
-	void OnTriggerEnter2D(Collider2D theCollider)
-	{
-		if (theCollider.CompareTag ("Player")) {
-			GemCollected ();
-		}
-	}
-
-	void GemCollected()
+	public override void OnItemCollected(GameObject obj)
 	{
 		gemCollider2D.enabled = false;
 		gemVisuals.SetActive (false);
 		collectedParticleSystem.SetActive (true);
 		Invoke ("DeactivateGemGameObject", durationOfCollectedParticleSystem);
 		GemsUI.CurrentGemQuantity += 1;
-
 	}
 
 	void DeactivateGemGameObject()
