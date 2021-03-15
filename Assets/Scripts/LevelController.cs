@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
     private static Level[] progress;
     public Animator animator;
     public Image mask;
+    public PlayerStatistics localPlayerData;
 
     private static int currentLevel;
     private static bool completed;
@@ -24,6 +25,7 @@ public class LevelController : MonoBehaviour
         }
         mask.gameObject.SetActive(false);
         currentLevel = SceneManager.GetActiveScene().buildIndex;
+        localPlayerData = GlobalControl.Instance.savedPlayerData;
     }
 
     void Update()
@@ -31,6 +33,8 @@ public class LevelController : MonoBehaviour
         if (completed == true)
         {
             FadeToNextLevel();
+            localPlayerData.Gems = GemsUI.CurrentGemQuantity;
+            GlobalControl.Instance.savedPlayerData = localPlayerData;
         }
     }
 

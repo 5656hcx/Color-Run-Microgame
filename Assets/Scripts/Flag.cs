@@ -8,9 +8,6 @@ public class Flag : CollectibleController
 
     public override void OnItemCollected(GameObject obj)
     {
-        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-        sr.sprite = GetComponent<SpriteRenderer>().sprite;
-        sr.color = Color.white;
         Entrance.GetComponent<SpriteRenderer>().color = Color.grey;
         gameObject.SetActive(false);
 
