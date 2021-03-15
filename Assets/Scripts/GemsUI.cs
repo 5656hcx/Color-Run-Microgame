@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class GemsUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Text gemQuantity;
     public static int CurrentGemQuantity;
     public PlayerStatistics localPlayerData;
+
+    private TextMeshProUGUI gemQuantity;
+
     void Start()
     {
+        gemQuantity = GetComponent<TextMeshProUGUI>();
         localPlayerData = GlobalControl.Instance.savedPlayerData;
         CurrentGemQuantity = localPlayerData.Gems;
     }
 
-    // Update is called once per frame
     void Update()
     {
         gemQuantity.text = CurrentGemQuantity.ToString();

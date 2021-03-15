@@ -6,6 +6,7 @@ public class GlobalControl : MonoBehaviour
 {
     public static GlobalControl Instance;
     public PlayerStatistics savedPlayerData = new PlayerStatistics();
+    
     void Awake()
     {
         if (Instance == null)

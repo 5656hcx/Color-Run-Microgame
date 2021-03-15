@@ -66,7 +66,7 @@ public class UIController : MonoBehaviour
 				this.dialog.gameObject.SetActive(false);
 				this.dialog = dialog;
 				this.dialog.gameObject.SetActive(true);
-				changeTitle();
+				ChangeTitle();
 			}
 			else
 			{
@@ -90,10 +90,17 @@ public class UIController : MonoBehaviour
 
 	/* Animations - Show debug message */
 
+	public void SetupToast(string text, float yOffset)
+	{
+		toast.text = text;
+		toast.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, yOffset);
+		toast.color = Color.white;
+		toast.gameObject.SetActive(true);
+	}
+
 	public void NotYetImplemented()
 	{
-		toast.gameObject.SetActive(true);
-		toast.color = Color.white;
+		SetupToast("NOT_YET_IMPLEMENTED", 80);
 	}
 
 	void Update()
@@ -101,7 +108,11 @@ public class UIController : MonoBehaviour
 		if (toast.gameObject.activeSelf)
 		{
 			toast.color -= new Color(0, 0, 0, toastFadeRate * Time.deltaTime);
-			if (toast.color.a <= 0) toast.gameObject.SetActive(false);
+			if (toast.color.a <= 0)
+			{
+				toast.gameObject.SetActive(false);
+				toast.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 80);
+			}
 		}
 	}
 
@@ -140,12 +151,28 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	public void setTitle(Sprite sprite)
+	public void SetTitle(Sprite sprite)
 	{
 		newTitle = sprite;
 	}
 
-	private void changeTitle() {
+	private void ChangeTitle() {
 		title.sprite = animator.GetBool("ShowDialog") ? newTitle : rawTitle;
+	}
+
+	// May need to separate purchase from UI classes
+	// 
+	public void Purchase(int price)
+	{
+		if(price <= GemsUI.CurrentGemQuantity)
+		{
+			GemsUI.CurrentGemQuantity -= price;
+			// Life++
+			GlobalControl.Instance.savedPlayerData.Gems = GemsUI.CurrentGemQuantity;
+		}
+		else
+		{
+			SetupToast("No enough GEMS!", 140);
+		}
 	}
 }
