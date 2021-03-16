@@ -641,10 +641,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 80021449-346a-4853-8931-5698bc8ad7db
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Color Run
+  organizationId: wechat_os_qy051m8h1xnzwkqgj0mz09ivk
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

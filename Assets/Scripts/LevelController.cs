@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 using datatype;
 
@@ -26,6 +27,13 @@ public class LevelController : MonoBehaviour
         mask.gameObject.SetActive(false);
         currentLevel = SceneManager.GetActiveScene().buildIndex;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
+
+        // Analytics - Level Reached
+        // 
+        AnalyticsEvent.Custom("Level_Reached", new Dictionary<string, object>
+        {
+            { "level_id", currentLevel },
+        });
     }
 
     void Update()
@@ -60,6 +68,16 @@ public class LevelController : MonoBehaviour
         {
             index = 0;
         }
+
+        // Analytics - Level Completed
+        // 
+        AnalyticsEvent.Custom("Level_Completed", new Dictionary<string, object>
+        {
+            { "level_id", currentLevel },
+            { "time_elapsed", Time.timeSinceLevelLoad },
+            { "coin_collected", localPlayerData.Gems }
+        });
+
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
