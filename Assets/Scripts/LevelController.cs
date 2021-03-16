@@ -91,7 +91,6 @@ public class LevelController : MonoBehaviour
 
     public void Menu()
     {
-        Debug.Log(playerEntity.transform.position);
         animator.SetTrigger("MenuExpandTrigger");
     }
 
@@ -114,12 +113,18 @@ public class LevelController : MonoBehaviour
     {
         // Analytics - Replay Level
         // 
-        AnalyticsEvent.Custom("Replay_Level", new Dictionary<string, object>
+        AnalyticsResult result = AnalyticsEvent.Custom("Replay_Level", new Dictionary<string, object>
         {
             { "position_x", playerEntity.transform.position.x },
             { "position_y", playerEntity.transform.position.y },
             { "level_id", currentLevel }
         });
+
+        if(result == AnalyticsResult.Ok){
+            Debug.Log(0);
+        } else {
+            Debug.Log(1);
+        }
 
         currentLevel = currentLevel - 1;
         FadeToNextLevel();
