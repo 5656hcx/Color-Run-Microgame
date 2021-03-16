@@ -628,7 +628,11 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    UNet: 1
+    Build: 0
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
+    UNet: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -641,10 +645,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 80021449-346a-4853-8931-5698bc8ad7db
+  cloudProjectId: 7040622e-ba53-43d0-9f42-797872915f29
   framebufferDepthMemorylessMode: 0
   projectName: Color Run
-  organizationId: wechat_os_qy051m8h1xnzwkqgj0mz09ivk
+  organizationId: himebox
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
