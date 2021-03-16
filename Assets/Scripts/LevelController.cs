@@ -17,8 +17,11 @@ public class LevelController : MonoBehaviour
     private static int currentLevel;
     private static bool completed;
 
+    private GameObject playerEntity;
+
     void Start()
     {
+        playerEntity = GameObject.FindWithTag("Player");
         completed = false;
         if (progress == null)
         {
@@ -88,17 +91,36 @@ public class LevelController : MonoBehaviour
 
     public void Menu()
     {
+        Debug.Log(playerEntity.transform.position);
         animator.SetTrigger("MenuExpandTrigger");
     }
 
     public void Home()
     {
+        // Analytics - Quit Level
+        // 
+        AnalyticsEvent.Custom("Quit_Level", new Dictionary<string, object>
+        {
+            { "position_x", playerEntity.transform.position.x },
+            { "position_y", playerEntity.transform.position.y },
+            { "level_id", currentLevel }
+        });
+
         currentLevel = SceneManager.sceneCountInBuildSettings;
         FadeToNextLevel();
     }
 
     public void Restart()
     {
+        // Analytics - Replay Level
+        // 
+        AnalyticsEvent.Custom("Replay_Level", new Dictionary<string, object>
+        {
+            { "position_x", playerEntity.transform.position.x },
+            { "position_y", playerEntity.transform.position.y },
+            { "level_id", currentLevel }
+        });
+
         currentLevel = currentLevel - 1;
         FadeToNextLevel();
     }
