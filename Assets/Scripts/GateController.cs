@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class GateController : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class GateController : MonoBehaviour
         if (colorable && Input.GetKeyDown(KeyCode.R))
         {
             player.GetComponent<SpriteRenderer>().color = color;
+            AnalyticsEvent.Custom("Recolored", new Dictionary<string, object>
+            {
+                { "color", color.ToString() },
+                { "gate_num", this.name }
+            });
         }
     }
 

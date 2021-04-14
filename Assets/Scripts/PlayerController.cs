@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerController : PhysicsObject {
 
@@ -28,6 +29,10 @@ public class PlayerController : PhysicsObject {
             if (obj.tag == "Enemy")
             {
                 GetComponent<SpriteRenderer>().color = obj.GetComponent<SpriteRenderer>().color;
+
+                // Analytics - Hit by Enemy
+                // 
+                AnalyticsEvent.Custom("Hit_By_Enemy", new Dictionary<string, object> {});
                 break;
             }
         }

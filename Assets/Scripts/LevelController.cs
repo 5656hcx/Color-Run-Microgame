@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 using datatype;
 
@@ -16,8 +17,11 @@ public class LevelController : MonoBehaviour
     private static int currentLevel;
     private static bool completed;
 
+    private GameObject playerEntity;
+
     void Start()
     {
+        playerEntity = GameObject.FindWithTag("Player");
         completed = false;
         if (progress == null)
         {
@@ -26,6 +30,13 @@ public class LevelController : MonoBehaviour
         mask.gameObject.SetActive(false);
         currentLevel = SceneManager.GetActiveScene().buildIndex;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
+
+        // Analytics - Level Reached
+        // 
+        AnalyticsEvent.Custom("Level_Reached", new Dictionary<string, object>
+        {
+            { "level_id", currentLevel },
+        });
     }
 
     void Update()
@@ -60,6 +71,16 @@ public class LevelController : MonoBehaviour
         {
             index = 0;
         }
+
+        // Analytics - Level Completed
+        // 
+        AnalyticsEvent.Custom("Level_Completed", new Dictionary<string, object>
+        {
+            { "level_id", currentLevel },
+            { "time_elapsed", Time.timeSinceLevelLoad },
+            { "coin_collected", localPlayerData.Gems }
+        });
+
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
@@ -75,12 +96,36 @@ public class LevelController : MonoBehaviour
 
     public void Home()
     {
+        // Analytics - Quit Level
+        // 
+        AnalyticsEvent.Custom("Quit_Level", new Dictionary<string, object>
+        {
+            { "position_x", playerEntity.transform.position.x },
+            { "position_y", playerEntity.transform.position.y },
+            { "level_id", currentLevel }
+        });
+
         currentLevel = SceneManager.sceneCountInBuildSettings;
         FadeToNextLevel();
     }
 
     public void Restart()
     {
+        // Analytics - Replay Level
+        // 
+        AnalyticsResult result = AnalyticsEvent.Custom("Replay_Level", new Dictionary<string, object>
+        {
+            { "position_x", playerEntity.transform.position.x },
+            { "position_y", playerEntity.transform.position.y },
+            { "level_id", currentLevel }
+        });
+
+        if(result == AnalyticsResult.Ok){
+            Debug.Log(0);
+        } else {
+            Debug.Log(1);
+        }
+
         currentLevel = currentLevel - 1;
         FadeToNextLevel();
     }
