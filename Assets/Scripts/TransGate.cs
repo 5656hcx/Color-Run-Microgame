@@ -4,69 +4,46 @@ using UnityEngine;
 
 public class TransGate : MonoBehaviour
 { 
-	public GameObject target;
-    public PlayerController player;
     private bool trigger;
-    Collider2D col;
-
+    private GameObject player;
 
     [Header("References")]
-    public GameObject gemVisuals;
-    public GameObject collectedParticleSystem;
-    public BoxCollider2D gemCollider2D;
-
-    private float durationOfCollectedParticleSystem;
-
-    void Start()
-
-    {
-
-        // durationOfCollectedParticleSystem = collectedParticleSystem.GetComponent<ParticleSystem>().main.duration;
-
-    }
+    public TransGate target;
+    public GameObject gateParticleSystem;
 
     void Update()
-
     {
         if (trigger && Input.GetKeyDown(KeyCode.G))
         {
-            durationOfCollectedParticleSystem = collectedParticleSystem.GetComponent<ParticleSystem>().main.duration;
-            
-            collectedParticleSystem.SetActive (true);
-            Invoke ("DeactivateGemGameObject", durationOfCollectedParticleSystem);
-   
-           gemVisuals.SetActive(false);
+            player.SetActive(false);
+            gateParticleSystem.SetActive(true);
+            gateParticleSystem.transform.position = player.transform.position;
+            Invoke("DeactivateGemGameObject", gateParticleSystem.GetComponent<ParticleSystem>().main.duration);
         }
-        
     }
-
 
     void DeactivateGemGameObject()
     {
-        col.gameObject.transform.position = target.transform.position + new Vector3(1.5f, 0, 0);
-        gemVisuals.SetActive(true);
-        print(target.transform.position[0]);
-        collectedParticleSystem.SetActive (false);
+        player.transform.position = target.transform.position + Vector3.right;
+        player.SetActive(true);
+        gateParticleSystem.SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D col)
     {
-
-        // Vector3 tempVec =(collision.gameObject.transform.position - this.transform.position)*1.5f;
-
-        if (collision.gameObject.name== "Player") {
-
-            print(collision.gameObject.transform.position[0]);
+        if (col.gameObject.tag == "Player")
+        {
             trigger = true;
-            col = collision;
+            player = col.gameObject;
         }
-       
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        trigger = false;
-
+        if (col.gameObject.tag == "Player")
+        {
+            trigger = false;
+        }
     }
 
 }
