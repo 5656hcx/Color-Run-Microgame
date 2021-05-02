@@ -14,6 +14,7 @@ public class PortalController : MonoBehaviour
     {
         if (trigger && Input.GetKeyDown(KeyCode.R))
         {
+            PlayerAdapter.SetVelocity(Vector2.zero);
             player.SetActive(false);
             gateParticleSystem.SetActive(true);
             gateParticleSystem.transform.position = player.transform.position;

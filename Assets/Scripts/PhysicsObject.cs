@@ -50,6 +50,11 @@ public class PhysicsObject : MonoBehaviour {
 
     }
 
+    public void SetVelocity(Vector2 newSpeed)
+    {
+        this.velocity = newSpeed;
+    }
+
     void FixedUpdate()
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;

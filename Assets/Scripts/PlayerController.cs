@@ -15,14 +15,10 @@ public class PlayerController : PhysicsObject {
     // Use this for initialization
     void Awake () 
     {
+        PlayerAdapter.player = this;
         spriteRenderer = GetComponent<SpriteRenderer> ();
         // PlayerCollider = GetComponent<CapsuleCollider2D>();
         // animator = GetComponent<Animator> ();
-    }
-
-    public void ResetPhysics()
-    {
-        this.velocity = Vector2.zero;
     }
 
     protected override void OnCollisionHit()
