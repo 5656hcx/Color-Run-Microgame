@@ -20,6 +20,11 @@ public class PlayerController : PhysicsObject {
         // animator = GetComponent<Animator> ();
     }
 
+    public void ResetPhysics()
+    {
+        this.velocity = Vector2.zero;
+    }
+
     protected override void OnCollisionHit()
     {
         // ugly solution

@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransGate : MonoBehaviour
+public class PortalController : MonoBehaviour
 { 
     private bool trigger;
     private GameObject player;
 
-    [Header("References")]
-    public TransGate target;
+    public PortalController target;
     public GameObject gateParticleSystem;
 
     void Update()
     {
-        if (trigger && Input.GetKeyDown(KeyCode.G))
+        if (trigger && Input.GetKeyDown(KeyCode.R))
         {
             player.SetActive(false);
             gateParticleSystem.SetActive(true);
