@@ -14,6 +14,9 @@ public class EmitterController : MonoBehaviour
     private float firetime = 0.5f;
     private float nexttime = 0.0f;
 
+    private float gravity_right = 0;
+    private float gravity_left = 0;
+
 
     void Update()
     {
@@ -22,9 +25,20 @@ public class EmitterController : MonoBehaviour
             nexttime = firetime + Time.time;
 
             clone = Instantiate(bullet, point.position, point.rotation);
-            clone.tag = "Enemy";
             clone.GetComponent<SpriteRenderer>().color = chooseColor();
-            clone.GetComponent<Rigidbody2D>().velocity = speed * (count % 10 < 5 ? Vector3.right : Vector3.left);
+
+            Rigidbody2D rb2d = clone.GetComponent<Rigidbody2D>();
+            if (count % 10 < 5)
+            {
+                rb2d.velocity = speed * Vector3.right;
+                rb2d.AddForce(new Vector3(0, gravity_right, 0));
+            }
+            else
+            {
+                rb2d.velocity = speed * Vector3.left;
+                rb2d.AddForce(new Vector3(0, gravity_left, 0));
+            }
+
             count++;
         }
 
