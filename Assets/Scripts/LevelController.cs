@@ -10,9 +10,13 @@ using datatype;
 public class LevelController : MonoBehaviour
 {
     private static Level[] progress;
+
     public Animator animator;
     public Image mask;
     public PlayerStatistics localPlayerData;
+
+    public Image audioSwitcher;
+    public Sprite[] audioIndicator;
 
     private static int currentLevel;
     private static bool completed;
@@ -132,6 +136,19 @@ public class LevelController : MonoBehaviour
 
     public void Music()
     {
-        // NOT YET IMPLEMENTED
+        if (GlobalControl.Instance != null)
+        {
+            AudioSource bgm = GlobalControl.Instance.GetComponent<AudioSource>();
+            if (bgm.isPlaying)
+            {
+                bgm.Pause();
+                audioSwitcher.sprite = audioIndicator[1];
+            }
+            else
+            {
+                bgm.Play();
+                audioSwitcher.sprite = audioIndicator[0];
+            }
+        }
     }
 }
