@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
 
 	public Toggle toggleMusic;
 	public Toggle toggleTips;
+	public GameObject Poppings;
 
 	void Start()
 	{
@@ -56,13 +57,18 @@ public class UIController : MonoBehaviour
 
 	public void ShowDialog(Image dialog)
 	{
-		if (this.dialog == null) this.dialog = dialog;
+		if (this.dialog == null)
+		{
+			this.dialog = dialog;
+			Poppings.SetActive(false);
+		}
 		if (this.dialog == dialog)
 		{
 			if (animator.GetBool("ShowDialog"))
 			{
 				this.dialog.gameObject.SetActive(false);
 			}
+			else Poppings.SetActive(false);
 			animator.SetBool("ShowDialog", !animator.GetBool("ShowDialog"));
 		}
 		else
@@ -78,6 +84,7 @@ public class UIController : MonoBehaviour
 			else
 			{
 				this.dialog = dialog;
+				Poppings.SetActive(false);
 				animator.SetBool("ShowDialog", true);
 			}
 		}
@@ -86,7 +93,15 @@ public class UIController : MonoBehaviour
 	private void ShowDialogAnimEnds()
 	{
 		dialog.gameObject.SetActive(animator.GetBool("ShowDialog"));
-		buttonGroup.SetActive(dialog.gameObject.activeSelf ? !hideButtonGroup : true);
+		if (dialog.gameObject.activeSelf)
+		{
+			buttonGroup.SetActive(!hideButtonGroup);
+		}
+		else
+		{
+			buttonGroup.SetActive(true);
+			Poppings.SetActive(true);
+		}
 	}
 
 	// Ugly solution
