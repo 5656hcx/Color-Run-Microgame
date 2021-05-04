@@ -19,11 +19,6 @@ public class SkinPicker : MonoBehaviour
 
     private SkinHelper sh;
 
-    void OnApplicationQuit()
-    {
-        sh.SaveSkinners();
-    }
-
     void OnDestroy()
     {
         sh.SaveSkinners();
@@ -56,6 +51,7 @@ public class SkinPicker : MonoBehaviour
                 unlock.interactable = false;
                 equipText.text = "Equip";
                 equip.interactable = true;
+                sh.SaveSkinners();
             }
         });
 
@@ -65,6 +61,7 @@ public class SkinPicker : MonoBehaviour
             equipped = selected;
             equipText.text = "Equipped";
             equip.interactable = false;
+            sh.SaveSkinners();
         });
     }
 

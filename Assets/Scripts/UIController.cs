@@ -28,11 +28,6 @@ public class UIController : MonoBehaviour
 	public Toggle toggleTips;
 	public GameObject Poppings;
 
-	void OnApplicationQuit()
-	{
-		sm.SaveSetting();
-	}
-
 	void OnDestroy()
 	{
 		sm.SaveSetting();
