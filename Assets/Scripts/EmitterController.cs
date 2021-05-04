@@ -17,6 +17,10 @@ public class EmitterController : MonoBehaviour
     private float gravity_right = 0;
     private float gravity_left = 0;
 
+    public enum ColorMode { RANDOM, FIXED };
+
+    public ColorMode colorMode = ColorMode.RANDOM;
+    public Color color;
 
     void Update()
     {
@@ -25,7 +29,11 @@ public class EmitterController : MonoBehaviour
             nexttime = firetime + Time.time;
 
             clone = Instantiate(bullet, point.position, point.rotation);
-            clone.GetComponent<SpriteRenderer>().color = chooseColor();
+            if (colorMode == ColorMode.RANDOM)
+            {
+                 clone.GetComponent<SpriteRenderer>().color = chooseColor();
+            }
+            else clone.GetComponent<SpriteRenderer>().color = color;
 
             Rigidbody2D rb2d = clone.GetComponent<Rigidbody2D>();
             if (count % 10 < 5)

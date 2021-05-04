@@ -33,11 +33,11 @@ public class PortalController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            if (GetComponent<SpriteRenderer>().color == col.GetComponent<SpriteRenderer>().color)
-            {
+            // if (GetComponent<SpriteRenderer>().color == col.GetComponent<SpriteRenderer>().color)
+            // {
                 trigger = true;
                 player = col.gameObject;
-            }
+            // }
         }
     }
 

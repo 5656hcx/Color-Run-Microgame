@@ -8020,6 +8020,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 402837788466305905, guid: 0ef5cc82fd9e742b595c158ff7942d6e,
         type: 3}
+      propertyPath: gravityModifier
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 402837788466305905, guid: 0ef5cc82fd9e742b595c158ff7942d6e,
+        type: 3}
+      propertyPath: horizontalSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 402837788466305905, guid: 0ef5cc82fd9e742b595c158ff7942d6e,
+        type: 3}
+      propertyPath: jumpTakeOffSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 402837788466305905, guid: 0ef5cc82fd9e742b595c158ff7942d6e,
+        type: 3}
       propertyPath: popUps.Array.size
       value: 4
       objectReference: {fileID: 0}
