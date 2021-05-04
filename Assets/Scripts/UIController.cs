@@ -28,6 +28,11 @@ public class UIController : MonoBehaviour
 	public Toggle toggleTips;
 	public GameObject Poppings;
 
+	void OnDestroy()
+	{
+		sm.SaveSetting();
+	}
+
 	void Start()
 	{
 		newTitle = title.sprite;
