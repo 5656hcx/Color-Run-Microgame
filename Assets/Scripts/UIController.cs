@@ -22,10 +22,17 @@ public class UIController : MonoBehaviour
 	private Image dialog;
 	private bool hideButtonGroup = false;
 
+	private SettingManager sm;
+
+	public Toggle toggleMusic;
+	public Toggle toggleTips;
+
 	void Start()
 	{
 		newTitle = title.sprite;
 		rawTitle = title.sprite;
+		LoadSetting();
+		InitToggles();
 		InitLevelEntries();
 	}
 
@@ -174,5 +181,30 @@ public class UIController : MonoBehaviour
 		{
 			SetupToast("No enough GEMS!", 140);
 		}
+	}
+
+	public void LoadSetting()
+	{
+		if (sm == null)
+		{
+			sm = SettingManager.GetInstance();
+			sm.ApplySetting();
+		}
+		toggleMusic.isOn = sm.music;
+		toggleTips.isOn = sm.tips;
+	}
+
+	private void InitToggles()
+	{
+		toggleMusic.onValueChanged.AddListener((bool value) => {
+			sm.music = value;
+			sm.ApplySetting();
+		});
+		/* temporarily disabled
+		toggleTips.onValueChanged.AddListener((bool value) => {
+			sm.tips = value;
+			sm.ApplySetting();
+		});
+		*/
 	}
 }

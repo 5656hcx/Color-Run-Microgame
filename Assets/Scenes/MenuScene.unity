@@ -251,7 +251,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c1cb8b59791a54c67b43efacf5b0b2a4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1043,6 +1043,8 @@ MonoBehaviour:
   EntryPrefab: {fileID: 7643324472257710479, guid: 97089d4013b2d4697921b7d71c07162d,
     type: 3}
   title: {fileID: 829656136}
+  toggleMusic: {fileID: 622497984}
+  toggleTips: {fileID: 1234781560}
 --- !u!222 &253933711
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2139,7 +2141,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1561149847}
   toggleTransition: 1
   graphic: {fileID: 981325}

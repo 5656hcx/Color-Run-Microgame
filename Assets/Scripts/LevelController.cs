@@ -95,6 +95,8 @@ public class LevelController : MonoBehaviour
 
     public void Menu()
     {
+        AudioSource bgm = GlobalControl.Instance.GetComponent<AudioSource>();
+        audioSwitcher.sprite = bgm.isPlaying ? audioIndicator[0] : audioIndicator[1];
         animator.SetTrigger("MenuExpandTrigger");
     }
 
@@ -124,12 +126,6 @@ public class LevelController : MonoBehaviour
             { "level_id", currentLevel }
         });
 
-        if(result == AnalyticsResult.Ok){
-            Debug.Log(0);
-        } else {
-            Debug.Log(1);
-        }
-
         currentLevel = currentLevel - 1;
         FadeToNextLevel();
     }
@@ -138,16 +134,17 @@ public class LevelController : MonoBehaviour
     {
         if (GlobalControl.Instance != null)
         {
-            AudioSource bgm = GlobalControl.Instance.GetComponent<AudioSource>();
-            if (bgm.isPlaying)
+            SettingManager sm = SettingManager.GetInstance();
+            sm.music = !sm.music;
+            sm.ApplySetting();
+
+            if (sm.music)
             {
-                bgm.Pause();
-                audioSwitcher.sprite = audioIndicator[1];
+                audioSwitcher.sprite = audioIndicator[0];
             }
             else
             {
-                bgm.Play();
-                audioSwitcher.sprite = audioIndicator[0];
+                audioSwitcher.sprite = audioIndicator[1];
             }
         }
     }
