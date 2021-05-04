@@ -135,6 +135,13 @@ public class UIController : MonoBehaviour
 		SetupToast("NOT_YET_IMPLEMENTED", 80);
 	}
 
+	public void SupportUS(string text)
+	{
+		GemsUI.CurrentGemQuantity += 5;
+		GlobalControl.Instance.savedPlayerData.Gems = GemsUI.CurrentGemQuantity;
+		SetupToast(text, 80);
+	}
+
 	void Update()
 	{
 		if (toast.gameObject.activeSelf)
