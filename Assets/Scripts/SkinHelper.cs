@@ -82,4 +82,24 @@ public class SkinHelper
 			XMLHelper.Save<Skinner>(ref skinners, path);
 		}
 	}
+
+	public ref Sprite GetEquippedSkin()
+	{
+		GetSkins();
+		
+		if (skinners == null)
+		{
+			GetSkinners();
+		}
+
+		int i = 0;
+		for (; i<skinners.Length; i++)
+		{
+			if (skinners[i].equip)
+			{
+				return ref skins[i];
+			}
+		}
+		return ref skins[0];
+	}
 }
