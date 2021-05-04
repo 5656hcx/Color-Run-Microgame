@@ -38,12 +38,12 @@ public class EmitterController : MonoBehaviour
             Rigidbody2D rb2d = clone.GetComponent<Rigidbody2D>();
             if (count % 10 < 5)
             {
-                rb2d.velocity = speed * Vector3.right;
+                rb2d.velocity = speed * Vector3.down;
                 rb2d.AddForce(new Vector3(0, gravity_right, 0));
             }
             else
             {
-                rb2d.velocity = speed * Vector3.left;
+                rb2d.velocity = speed * Vector3.up;
                 rb2d.AddForce(new Vector3(0, gravity_left, 0));
             }
 
