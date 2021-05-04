@@ -192,19 +192,26 @@ public class UIController : MonoBehaviour
 		title.sprite = animator.GetBool("ShowDialog") ? newTitle : rawTitle;
 	}
 
+	public void Purchase2(int price)
+	{
+		Purchase(price);
+	}
+
 	// May need to separate purchase from UI classes
 	// 
-	public void Purchase(int price)
+	public bool Purchase(int price)
 	{
 		if(price <= GemsUI.CurrentGemQuantity)
 		{
 			GemsUI.CurrentGemQuantity -= price;
 			// Life++
 			GlobalControl.Instance.savedPlayerData.Gems = GemsUI.CurrentGemQuantity;
+			return true;
 		}
 		else
 		{
 			SetupToast("No enough GEMS!", 140);
+			return false;
 		}
 	}
 
