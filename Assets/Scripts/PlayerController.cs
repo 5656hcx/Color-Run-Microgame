@@ -13,11 +13,18 @@ public class PlayerController : PhysicsObject {
     // private Animator animator;
 
     // Use this for initialization
-    void Awake () 
+    void Awake() 
     {
+        PlayerAdapter.player = this;
         spriteRenderer = GetComponent<SpriteRenderer> ();
         // PlayerCollider = GetComponent<CapsuleCollider2D>();
         // animator = GetComponent<Animator> ();
+    }
+
+    void Start()
+    {
+        SkinHelper sh = SkinHelper.GetInstance();
+        spriteRenderer.sprite = sh.GetEquippedSkin();
     }
 
     protected override void OnCollisionHit()

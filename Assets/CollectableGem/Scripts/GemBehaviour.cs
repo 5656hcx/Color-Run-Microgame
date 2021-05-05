@@ -8,7 +8,7 @@ public class GemBehaviour : CollectibleController
 	[Header("References")]
 	public GameObject gemVisuals;
 	public GameObject collectedParticleSystem;
-	public CircleCollider2D gemCollider2D;
+	public BoxCollider2D gemCollider2D;
 
 	private float durationOfCollectedParticleSystem;
 

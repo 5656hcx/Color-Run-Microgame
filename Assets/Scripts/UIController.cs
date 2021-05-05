@@ -22,10 +22,23 @@ public class UIController : MonoBehaviour
 	private Image dialog;
 	private bool hideButtonGroup = false;
 
+	private SettingManager sm;
+
+	public Toggle toggleMusic;
+	public Toggle toggleTips;
+	public GameObject Poppings;
+
+	void OnDestroy()
+	{
+		sm.SaveSetting();
+	}
+
 	void Start()
 	{
 		newTitle = title.sprite;
 		rawTitle = title.sprite;
+		LoadSetting();
+		InitToggles();
 		InitLevelEntries();
 	}
 
@@ -49,13 +62,18 @@ public class UIController : MonoBehaviour
 
 	public void ShowDialog(Image dialog)
 	{
-		if (this.dialog == null) this.dialog = dialog;
+		if (this.dialog == null)
+		{
+			this.dialog = dialog;
+			Poppings.SetActive(false);
+		}
 		if (this.dialog == dialog)
 		{
 			if (animator.GetBool("ShowDialog"))
 			{
 				this.dialog.gameObject.SetActive(false);
 			}
+			else Poppings.SetActive(false);
 			animator.SetBool("ShowDialog", !animator.GetBool("ShowDialog"));
 		}
 		else
@@ -71,6 +89,7 @@ public class UIController : MonoBehaviour
 			else
 			{
 				this.dialog = dialog;
+				Poppings.SetActive(false);
 				animator.SetBool("ShowDialog", true);
 			}
 		}
@@ -79,7 +98,15 @@ public class UIController : MonoBehaviour
 	private void ShowDialogAnimEnds()
 	{
 		dialog.gameObject.SetActive(animator.GetBool("ShowDialog"));
-		buttonGroup.SetActive(dialog.gameObject.activeSelf ? !hideButtonGroup : true);
+		if (dialog.gameObject.activeSelf)
+		{
+			buttonGroup.SetActive(!hideButtonGroup);
+		}
+		else
+		{
+			buttonGroup.SetActive(true);
+			Poppings.SetActive(true);
+		}
 	}
 
 	// Ugly solution
@@ -101,6 +128,13 @@ public class UIController : MonoBehaviour
 	public void NotYetImplemented()
 	{
 		SetupToast("NOT_YET_IMPLEMENTED", 80);
+	}
+
+	public void SupportUS(string text)
+	{
+		GemsUI.CurrentGemQuantity += 5;
+		GlobalControl.Instance.savedPlayerData.Gems = GemsUI.CurrentGemQuantity;
+		SetupToast(text, 80);
 	}
 
 	void Update()
@@ -160,19 +194,51 @@ public class UIController : MonoBehaviour
 		title.sprite = animator.GetBool("ShowDialog") ? newTitle : rawTitle;
 	}
 
+	public void Purchase2(int price)
+	{
+		Purchase(price);
+	}
+
 	// May need to separate purchase from UI classes
 	// 
-	public void Purchase(int price)
+	public bool Purchase(int price)
 	{
 		if(price <= GemsUI.CurrentGemQuantity)
 		{
 			GemsUI.CurrentGemQuantity -= price;
 			// Life++
 			GlobalControl.Instance.savedPlayerData.Gems = GemsUI.CurrentGemQuantity;
+			return true;
 		}
 		else
 		{
 			SetupToast("No enough GEMS!", 140);
+			return false;
 		}
+	}
+
+	public void LoadSetting()
+	{
+		if (sm == null)
+		{
+			sm = SettingManager.GetInstance();
+			sm.ApplySetting();
+		}
+		toggleMusic.isOn = sm.music;
+		toggleTips.isOn = sm.tips;
+	}
+
+	private void InitToggles()
+	{
+		toggleMusic.onValueChanged.AddListener((bool value) => {
+			sm.music = value;
+			sm.ApplySetting();
+		});
+		/* temporarily disabled
+		toggleTips.onValueChanged.AddListener((bool value) => {
+			sm.tips = value;
+			sm.ApplySetting();
+		});
+		*/
 	}
 }
